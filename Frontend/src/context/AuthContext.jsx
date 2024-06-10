@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 
 const initialState = {
-    user: localStorage.getItem("user") !== undefined ? JSON.parse(localStorage.getItem("user")) : null,
-    role: localStorage.getItem("role") !== undefined ? JSON.parse(localStorage.getItem("role")) : null,
-    token: localStorage.getItem("token") !== undefined ? JSON.parse(localStorage.getItem("token")) : null,
+    user: localStorage.getItem("user") !== undefined 
+        ? JSON.parse(localStorage.getItem("user")) 
+        : null,
+    role: localStorage.getItem("role") || null,
+    token: localStorage.getItem("token") || null,
 };
 
 export const authContext = createContext(initialState);
@@ -20,8 +22,9 @@ const authReducer = (state, action) => {
         case "LOGIN_SUCCESS":
             return {
                 user: action.payload.user,
+                token: action.payload.token,
                 role: action.payload.role,
-                token: action.payload.token
+                
             };    
         case "LOGOUT":
             return {
@@ -39,16 +42,17 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(state.user));
-        localStorage.setItem("role", JSON.stringify(state.role));
-        localStorage.setItem("token", JSON.stringify(state.token));
-    }, [state])
+        localStorage.setItem("token",state.token);
+        localStorage.setItem("role", state.role);
+
+    }, [state]);
 
     return (
         <authContext.Provider
             value={{
                 user: state.user,
-                role: state.role,
                 token: state.token,
+                role: state.role,
                 dispatch,
             }}
         >
