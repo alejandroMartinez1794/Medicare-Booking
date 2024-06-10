@@ -42,8 +42,9 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(state.user));
-        localStorage.setItem("role", state.role);
         localStorage.setItem("token",state.token);
+        localStorage.setItem("role", state.role);
+
     }, [state]);
 
     return (
