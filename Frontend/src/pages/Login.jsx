@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from '../config';
 import { toast } from 'react-toastify';
 import { authContext } from '../context/AuthContext.jsx';
+import Hashloader from 'react-spinners/HashLoader';
 
 
 
@@ -44,14 +45,14 @@ const Login   = () => {
 
             dispatch({ 
                 type: 'LOGIN_SUCCESS',
-                payload : {
-                    user: result.user,
+                payload: {
+                    user: result.data,
                     token: result.token,
                     role: result.role,
                 },
             } );
 
-            console.log(result);
+            console.log(result, "login data");
 
             setLoading(false)
             toast.success(result.message)
@@ -104,7 +105,7 @@ const Login   = () => {
                             type="submit"
                             className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 px-3"
                         >
-                            Login
+                            {loading ? <Hashloader size={25} color="#fff"/> :"Login"}
                         </button>
                     </div>
 
