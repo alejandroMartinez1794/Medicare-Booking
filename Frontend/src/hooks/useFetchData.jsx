@@ -12,9 +12,9 @@ const useFetchData = (url) => {
             setLoading(true);
             try {
                 const res = await fetch(url, {
-                    headers: {Athorization : `Bearer ${token}`}
+                    headers: {Authorization : `Bearer ${token}`}
                 })
-                const data = await res.json();
+                const result = await res.json();
 
                 if(!res.ok) {
                     throw new Error(result.message + '🤢');
@@ -22,9 +22,9 @@ const useFetchData = (url) => {
 
                 setData(result.data);
                 setLoading(false);
-            }   catch (error) {
+            }   catch (err) {
                 setLoading(false);
-                setError(error.message);
+                setError(err.message);
             }    
         };
         fetchData();
