@@ -1,13 +1,14 @@
 import React from 'react';
-import Loader from '../../components/Loader/Loader';
+import Loader from '../../components/Loader/Loading';
 import Error from '../../components/Error/Error';
-import { useGetPRofile } from "../../hooks/useFetchData";
+import useGetProfile  from "../../hooks/useFetchData";
 import { BASE_URL } from "../../config";
+import Tabs from './Tabs';
 
 
 const Dashboard = () => {
 
-    const { data, loading, error } = useGetPRofile(
+    const { data, loading, error } = useGetProfile(
         `${BASE_URL}/doctors/profile/me`
     );
 
@@ -19,7 +20,7 @@ const Dashboard = () => {
             
                 {!loading && !error && data && (
                     <div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
-                    
+                        <Tabs/>
                     </div>
                 )};
             </div>
