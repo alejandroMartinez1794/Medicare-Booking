@@ -8,13 +8,16 @@ const Profile = () => {
         phone: "",
         bio: "",
         gender: "",
-        Specialization: "",
-        ticketPrice: 0,
+        specialization: "",
+        ticketPrice: null, 
+        qualifications:[{startingDate: " " , endingDate: " "  }],
+        experiencies: [],
+        timeSlots: [],
     });
     
     const handleInputChange = (e) => {
-
-    }
+        setFormData({...formData, [e.target.name]: e.target.value})
+    };
     
     return (
         <div>
@@ -38,7 +41,7 @@ const Profile = () => {
                     <p className="form_label">Email*</p>
                     <input 
                         type="text" 
-                        name="Email" 
+                        name="email" 
                         value={formData.email} 
                         onChange={handleInputChange}
                         placeholder="Enter your email" 
@@ -71,7 +74,6 @@ const Profile = () => {
                         maxLength={100}
                     />
                 </div>
-
                 <div className="mb-5">
                     <div className="grid grid-cols-3 gap-5 mb-[30px]">
                         <div>
@@ -89,10 +91,10 @@ const Profile = () => {
                             </select>                                
                         </div>
                         <div>
-                            <p className="form_label">Specialization*</p>
+                            <p className="form_label">specialization*</p>
                             <select 
-                                name="Specialization" 
-                                value={formData.Specialization} 
+                                name="specialization" 
+                                value={formData.specialization} 
                                 onChange={handleInputChange} 
                                 className="form_input py-3.5"
                             >
@@ -102,7 +104,6 @@ const Profile = () => {
                                 <option value="dermatologist">Dermatologist</option>
                             </select>                                
                         </div>
-
                         <div>
                             <p className="form_label">Ticket Price*</p>
                             <input 
@@ -111,10 +112,42 @@ const Profile = () => {
                                 name="ticketPrice" 
                                 value={formData.ticketPrice}
                                 className="form_input"
+                                onChange={handleInputChange}
                             />
                         </div>    
                     </div>        
                 </div>
+
+                <div className="mb-5">
+                    <p className="form_label"> Qualifications*</p>
+                    {formData.qualifications?.map((item, index) => (
+                        <div key={index}>
+                            <div>
+                                <div className="grid grid-cols-2 gap-5">
+                                    <div>
+                                        <p className="form_label">Starting Date*</p>
+                                        <input 
+                                            type="date" 
+                                            name="startingDate" 
+                                            value={item.startingDate}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="form_label">Ending Date*</p>
+                                        <input 
+                                            type="date" 
+                                            name="endingDate" 
+                                            value={item.endingDate}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                </div>
+                            </div>                    
+                        </div>
+                    ))}
+                </div>
+
             </form>
         </div>
     );
