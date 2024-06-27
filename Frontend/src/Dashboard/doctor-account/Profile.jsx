@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AiOutlineDelete } from "react-icons/ai"; 
 
 const Profile = () => {
     
@@ -10,8 +11,12 @@ const Profile = () => {
         gender: "",
         specialization: "",
         ticketPrice: null, 
-        qualifications:[{startingDate: " " , endingDate: " "  }],
-        experiencies: [],
+        qualifications:[
+            {startingDate: " " , endingDate: " ", degree: " ", university: " "}
+        ],
+        experiences: [
+            {startingDate: " " , endingDate: " ", position: " ", hospital: " "}
+        ],
         timeSlots: [],
     });
     
@@ -117,7 +122,6 @@ const Profile = () => {
                         </div>    
                     </div>        
                 </div>
-
                 <div className="mb-5">
                     <p className="form_label"> Qualifications*</p>
                     {formData.qualifications?.map((item, index) => (
@@ -143,11 +147,91 @@ const Profile = () => {
                                         />
                                     </div>
                                 </div>
+                                <div className="grid grid-cols-2 gap-5 mt-5">
+                                    <div>
+                                        <p className="form_label">Degree*</p>
+                                        <input 
+                                            type="text" 
+                                            name="degree" 
+                                            value={item.degree}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="form_label">University*</p>
+                                        <input 
+                                            type="text" 
+                                            name="university" 
+                                            value={item.university}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                </div>
+                                <button className="bg-red-600 p-2 rounded-full text-white text-[18px] mt-2 mb-[30px] cursor-pointer">
+                                    <AiOutlineDelete />
+                                    </button>
                             </div>                    
                         </div>
                     ))}
+                    <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+                        Add Qualification
+                    </button>                        
                 </div>
-
+                <div className="mb-5">
+                    <p className="form_label"> Experiences*</p>
+                    {formData.experiences?.map((item, index) => (
+                        <div key={index}>
+                            <div>
+                                <div className="grid grid-cols-2 gap-5">
+                                    <div>
+                                        <p className="form_label">Starting Date*</p>
+                                        <input 
+                                            type="date" 
+                                            name="startingDate" 
+                                            value={item.startingDate}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="form_label">Ending Date*</p>
+                                        <input 
+                                            type="date" 
+                                            name="endingDate" 
+                                            value={item.endingDate}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-5 mt-5">
+                                    <div>
+                                        <p className="form_label">Position*</p>
+                                        <input 
+                                            type="text" 
+                                            name="position" 
+                                            value={item.position}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="form_label">Hospital*</p>
+                                        <input 
+                                            type="text" 
+                                            name="hospital" 
+                                            value={item.hospital}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                </div>
+                                <button className="bg-red-600 p-2 rounded-full text-white text-[18px] mt-2 mb-[30px] cursor-pointer">
+                                    <AiOutlineDelete />
+                                    </button>
+                            </div>                    
+                        </div>
+                    ))}
+                    <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+                        Add Experience
+                    </button>                        
+                </div>    
             </form>
         </div>
     );
