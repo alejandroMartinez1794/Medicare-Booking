@@ -17,7 +17,9 @@ const Profile = () => {
         experiences: [
             {startingDate: " " , endingDate: " ", position: " ", hospital: " "}
         ],
-        timeSlots: [],
+        timeSlots: [
+            {day: " " , startingTime: " ", endingDate: " "}
+        ],
     });
     
     const handleInputChange = (e) => {
@@ -231,7 +233,59 @@ const Profile = () => {
                     <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
                         Add Experience
                     </button>                        
-                </div>    
+                </div>
+                <div className="mb-5">
+                    <p className="form_label"> Time Slots*</p>
+                    {formData.timeSlots?.map((item, index) => (
+                        <div key={index}>
+                            <div>
+                                <div className="grid grid-cols-2 md:grid-cols-4 mb-[30px] gap-5">
+                                    <div>
+                                        <p className="form_label">Day*</p>
+                                        <select name="day" value={item.day} className="form_input py-3.5">
+                                        <option value="">Select</option>
+                                        <option value="saturday">Saturday</option>
+                                        <option value="sunday">Sunday</option>
+                                        <option value="monday">Monday</option>
+                                        <option value="tuesday">Tuesday</option>
+                                        <option value="wednesday">Wednesday</option>
+                                        <option value="thursday">Thursday</option>
+                                        <option value="friday">Friday</option>
+                                        </select>    
+                                    </div>
+                                    <div>
+                                        <p className="form_label">Starting Time*</p>
+                                        <input 
+                                            type="time" 
+                                            name="startingTime" 
+                                            value={item.startingTime}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="form_label">Ending Date*</p>
+                                        <input 
+                                            type="time" 
+                                            name="endingDate" 
+                                            value={item.endingDate}
+                                            className="form_input"
+                                        />
+                                    </div>
+                                    <div className="flex items-center">
+                                        <button className="bg-red-600 p-2 rounded-full text-white text-[18px] cursor-pointer mt-6">
+                                        <AiOutlineDelete />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>                    
+                        </div>
+                    ))}
+                    <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+                        Add TimeSlot
+                    </button>                        
+                </div>
+
+                
             </form>
         </div>
     );
