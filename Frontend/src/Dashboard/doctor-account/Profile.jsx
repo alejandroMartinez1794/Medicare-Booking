@@ -11,27 +11,25 @@ const Profile = () => {
         gender: "",
         specialization: "",
         ticketPrice: null, 
-        qualifications:[
-            {startingDate: " " , endingDate: " ", degree: " ", university: " "}
-        ],
-        experiences: [
-            {startingDate: " " , endingDate: " ", position: " ", hospital: " "}
-        ],
-        timeSlots: [
-            {day: " " , startingTime: " ", endingDate: " "}
-        ],
+        qualifications:[{startingDate: " " , endingDate: " ", degree: " ", university: " "}],
+        experiences: [{startingDate: " " , endingDate: " ", position: " ", hospital: " "}],
+        timeSlots: [{day: " " , startingTime: " ", endingDate: " "}],
+        about: "",
+        photo: null
     });
-    
     const handleInputChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
     };
     
+    const handleFileInputChange = (e) => { }
+
+    const updateProfileHandler = async e => {
+        e.preventDefault();
+    };
+
     return (
         <div>
-            <h2 className="text-headingColor font-bold text-[24px] leading-9 mb-10">
-                Profile Information
-            </h2>
-
+            <h2 className="text-headingColor font-bold text-[24px] leading-9 mb-10">Profile Information</h2>
             <form>
                 <div className="mb-5">
                     <p className="form_label">Name*</p>
@@ -284,8 +282,54 @@ const Profile = () => {
                         Add TimeSlot
                     </button>                        
                 </div>
+                <div className="mb-5">
+                    <p className="form_label">About*</p>
+                    <textarea 
+                        name="about" 
+                        rows={5} 
+                        value={formData.about} 
+                        placeholder="Write about you" 
+                        onChange={handleInputChange}
+                        className="form_input"
+                    ></textarea>
+                </div>
+                <div className="mb-5">
+                    {formData.photo && (
+                        <figure className="w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center
+                        justify-center">
+                            <img 
+                                src={formData.photo} 
+                                alt="" 
+                                className="w-full rounded-full"
+                            />
+                        </figure>
+                    )}
 
-                
+                    <div className="relative w-[130px] h-[50px]">
+                        <input
+                            type="file"
+                            name="photo"
+                            id="customfile"
+                            onChange={handleFileInputChange}
+                            accept=".jpg .png"
+                            className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                        />
+                        <label
+                            htmlFor="customfile"
+                            className="absolute top-0 left-0 w-full h-full flex items-center px-[0.75rem] py-[0.375rem]
+                            text-[15px] leading-6 overflow-hidden bg-[#0066ff48] text-headingColor font-semibold rounded-lg
+                            truncate cursor-pointer"
+                        >
+                            Uploading Photo
+                        </label>    
+                    </div>
+                </div>
+                <div className="mt-7">
+                    <button type="submit" onClick={updateProfileHandler} className="bg-primaryColor text-white text-[18px]
+                    leading-[30px] w-full py-3 px-4 rounded-lg ">
+                        Update Profile
+                    </button>
+                </div>
             </form>
         </div>
     );
